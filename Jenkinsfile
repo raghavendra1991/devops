@@ -20,7 +20,7 @@ pipeline {
         stage ('Unit Test') {
             steps {
                 echo 'Building Docker Image'
-                sh 'docker run --rm -d -v $PWD/test-reports:/app/reports $DOCKER_HUB_REPO:$BUILD_NUMBER'
+                sh 'docker run --rm -v $PWD/test-reports:/app/reports $DOCKER_HUB_REPO:$BUILD_NUMBER'
                 junit '$PWD/test-reports/.xml'       
             }
         }  
