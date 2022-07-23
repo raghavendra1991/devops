@@ -11,10 +11,12 @@ pipeline {
         socks_proxy = 'socks://127.0.0.1:3128/'
     }
     stages {
-        stage('Unit Tests'){        
-            def imageTest= docker.build("${imageName}-test", "-f Dockerfile.test .")
-            imageTest.inside{
-               sh 'python test_main.py'
+        stage('Unit Tests') {
+            steps {
+                def imageTest= docker.build("${imageName}-test", "-f Dockerfile.test .")
+                imageTest.inside {
+                    sh 'python test_main.py'
+                }
             }
         }
     }
