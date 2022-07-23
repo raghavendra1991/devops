@@ -14,9 +14,15 @@ pipeline {
         stage ('Build Docker Image') {
             steps {
                 echo 'Building Docker Image'
-                sh 'docker build -t $DOCKER_HUB_REPO:$BUILD_NUMBER .'
-                sh 'docker run -d -v $PWD/reports:/app/reports $DOCKER_HUB_REPO:$BUILD_NUMBER'       
+                sh 'docker build -t $DOCKER_HUB_REPO:$BUILD_NUMBER .'       
             }
         }
+        stage ('Unit Test') {
+            steps {
+                echo 'Building Docker Image'
+                sh 'docker run -d --rm -v $PWD/reports:/app/reports $DOCKER_HUB_REPO:$BUILD_NUMBER'
+                sh 'junit $PWD/reports/.xml'       
+            }
+        }  
     }
 }
