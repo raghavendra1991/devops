@@ -13,16 +13,6 @@ colorama==0.4.3
 conan==1.49.0
 coverage==6.4.2
 cryptography==2.8
-dbus-python==1.2.16
-decorator==4.4.2
-dill==0.3.5.1
-distlib==0.3.5
-distro==1.4.0
-distro-info===0.23ubuntu1
-dnspython==1.16.0
-docker==4.1.0
-docker-compose==1.25.0
-dockerpty==0.4.1
 docopt==0.6.2
 entrypoints==0.3
 fabric==2.5.0
