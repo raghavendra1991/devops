@@ -21,8 +21,7 @@ pipeline {
             steps {
                 echo 'Building Docker Image'
                 sh 'docker run --name="test" -v $PWD/test-reports:/app/test-reports $DOCKER_HUB_REPO:$BUILD_NUMBER \
-                    wget locahost:5000'
-                       
+                    wget locahost:5000'       
             }
         }  
         stage ('Build Docker Image') {
