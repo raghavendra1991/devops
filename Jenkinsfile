@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        imageName = "raghaduvva/flaskapp"
+        DOCKER_HUB_REPO = "raghaduvva/flaskapp"
         CONTAINER_NAME = "app"
         http_proxy = 'http://127.0.0.1:3128/'
         https_proxy = 'http://127.0.0.1:3128/'
@@ -11,12 +11,11 @@ pipeline {
         socks_proxy = 'socks://127.0.0.1:3128/'
     }
     stages {
-        stage ('Unit Tests') {
-            steps {}        
-            def imageTest= docker.build("${imageName}-test .")
-            imageTest.inside {
-                sh 'python test_main.py'
+        stage ('Build Docker Image') {
+            steps {
+                echo 'Building Docker Image'
+                sh 'docker build -t $DOCKER_HUB_REPO:$BUILD_NUMBER .'       
             }
-        }
+        } 
     }
 }
