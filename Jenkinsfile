@@ -24,7 +24,7 @@ pipeline {
                     wget locahost:5000'       
             }
         }  
-        stage ('Build Docker Image') {
+        stage ('stop') {
             steps {
                 echo 'Building Docker Image'
                 sh 'docker stop test || docker rm test'
