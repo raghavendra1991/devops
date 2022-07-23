@@ -12,9 +12,11 @@ pipeline {
     }
     stages {
         stage('Unit Tests') {
-            steps {
-                def imageTest= docker.build("${imageName}-test", "-f Dockerfile.test .")
-                imageTest.inside {
+            steps {  
+                def image = "duvvaraghavendra/pythonapp"
+                docker.build("${image}:${env.BUILD_ID}")
+                docker.image("${image}:${env.BUILD_ID}").run("--name ${containerName} --publish 5000:5000")
+                image.inside {
                     sh 'python test_main.py'
                 }
             }
