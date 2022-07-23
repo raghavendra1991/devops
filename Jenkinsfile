@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo 'Building Docker Image'
                 sh 'docker build -t $DOCKER_HUB_REPO:$BUILD_NUMBER .'
-                sh 'docker run --rm -v $PWD/reports:/app/reports $DOCKER_HUB_REPO:$BUILD_NUMBER'       
+                sh 'docker run -d -v $PWD/reports:/app/reports $DOCKER_HUB_REPO:$BUILD_NUMBER'       
             }
         }
     }
