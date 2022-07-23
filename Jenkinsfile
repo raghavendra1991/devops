@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Building Docker Image'
                 sh 'docker run -d --rm -v $PWD/reports:/app/reports $DOCKER_HUB_REPO:$BUILD_NUMBER'
-                junit '$PWD/reports/.xml'       
+                junit '$PWD/test-reports/.xml'       
             }
         }  
     }
