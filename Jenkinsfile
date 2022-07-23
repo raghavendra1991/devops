@@ -20,9 +20,17 @@ pipeline {
         stage ('Unit Test') {
             steps {
                 echo 'Building Docker Image'
-                sh 'docker run --rm -v $PWD/test-reports:/app/test-reports $DOCKER_HUB_REPO:$BUILD_NUMBER'
-                junit '$PWD/test-reports/.xml'       
+                sh 'docker run --name="test" -v $PWD/test-reports:/app/test-reports $DOCKER_HUB_REPO:$BUILD_NUMBER \
+                    wget locahost:5000'
+                       
             }
         }  
+        stage ('Build Docker Image') {
+            steps {
+                echo 'Building Docker Image'
+                sh 'docker stop test || docker rm test'
+                junit '$PWD/test-reports/.xml'
+            }
+        }
     }
 }
